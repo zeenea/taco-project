@@ -18,7 +18,7 @@ tf_common_options: >-
 
 tf_init_cmd_debug_msg: "{{ tf_cmd_chdir_prefix }} {{ tf_init_cmd }}"
 tf_init_cmd: >-
-  terraform init -get=true
+  terraform init -no-color -get=true
   -upgrade={{ tf_upgrade|default(false)|lower }}
   {% if tflayer_backend_config is defined %}
     {% for backend_conf in tflayer_backend_config.items() %}
@@ -30,16 +30,16 @@ tf_init_cmd: >-
 
 tf_plan_cmd_debug_msg: "{{ tf_cmd_chdir_prefix }} {{ tf_plan_cmd }}"
 tf_plan_cmd: >-
-  terraform plan {{ tf_common_options }}
+  terraform plan -no-color {{ tf_common_options }}
 
 
 tf_apply_cmd_debug_msg: "{{ tf_cmd_chdir_prefix }} {{ tf_apply_cmd }}"
 tf_apply_cmd: >-
-  terraform apply -auto-approve {{ tf_common_options }}
+  terraform apply -no-color -auto-approve {{ tf_common_options }}
   {{ tf_cmd_std_redir_suffix }}
 
 
 tf_destroy_cmd_debug_msg: "{{ tf_cmd_chdir_prefix }} {{ tf_destroy_cmd }}"
 tf_destroy_cmd: >-
-  terraform destroy -force {{ tf_common_options }}
+  terraform destroy -no-color -force {{ tf_common_options }}
   {{ tf_cmd_std_redir_suffix }}
